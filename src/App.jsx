@@ -29,96 +29,101 @@ class MyMap extends React.Component {
     let startPoint = [];
     let endPoint = []; 
     let coordinates = {}
+    let urlData = ''
     // 使用封装的函数来创建地图
     const map = createMap(this.mapContainer);
 
-    // 添加图片
-    const mapImageManager = new MapImageManager(map);
-    mapImageManager.loadAndAddImages(NpcImgData);
+      // 添加图片
+      const mapImageManager = new MapImageManager(map);
+      // mapImageManager.loadAndAddImages(NpcImgData);
 
-    NpcImgData.forEach(image => {
-      map.on('click', `marker-${image.url}`, (e) => {
-        const result = image.url.match(/(.)(?=\.png)/i)[0];
-        if(result === 'J') {
-          startPoint = [13.489336051441882, 10.70610882442054]
-          endPoint = [14.3092277780572, 24.918872822222667]
-          coordinates = e.point
-        }else if(result === 'D') {
-          startPoint = [15.470666233335862, 8.622568640085177]
-          endPoint = [31.400595287497566, 4.928019584139264]
-          coordinates = e.point
-        }else {
-          return
+      NpcImgData.forEach(image => {
+        if (image.url.includes('T')) {
+          urlData = image.url
         }
-
-
-        const route = {
-          'type': 'FeatureCollection',
-          'features': [
-              {
-                  'type': 'Feature',
-                  'geometry': {
-                      'type': 'LineString',
-                      'coordinates': [startPoint, endPoint]
-                  }
-              }
-          ]
-        };
-
-        const lineDistance = turf.length(route.features[0]);
-        const arc = [];
-        const steps = 500;
-        for (let i = 0; i < lineDistance; i += lineDistance / steps) {
-          const segment = turf.along(route.features[0], i);
-          arc.push(segment.geometry.coordinates);
-        }
-        route.features[0].geometry.coordinates = arc;
-        let currentIndex = 0;
-
-        if (map.getSource('route')) {
-          map.getSource('route').setData(route);
-        } else {
-          map.addSource('route', {
-              'type': 'geojson',
-              'data': route
-          });
-        }
-       
-        let running = false;
-        const animate = () => {
-          running = true;
-          currentIndex++
-          const start =
-              route.features[0].geometry.coordinates[
-                currentIndex >= steps ? currentIndex - 1 : currentIndex
-              ];
-          const end =
-              route.features[0].geometry.coordinates[
-                currentIndex >= steps ? currentIndex : currentIndex + 1
-              ];
-          if(!start || !end) {
-              running = false;
-              this.setState(prevState => ({
-                showChatBox: !prevState.showChatBox,
-                coordinates: coordinates,  
-                clickedName: result === 'J' ? 1 : result === 'D'? 2 : 0,
-              }));
-              return;
+        map.on('click', `marker-${image.url}`, (e) => {
+          const result = image.url.match(/\/([^/]+)\.png/)[1]
+          if(result.includes("J")) {
+            startPoint = [13.489336051441882, 10.70610882442054]
+            endPoint = [14.3092277780572, 24.918872822222667]
+            coordinates = e.point
+          }else if(result.includes("D")) {
+            startPoint = [15.470666233335862, 8.622568640085177]
+            endPoint = [31.400595287497566, 4.928019584139264]
+            coordinates = e.point
+          }else {
+            return
           }
 
-          mapImageManager.moveImage('/src/assets/T.png', route.features[0].geometry.coordinates[currentIndex]);
 
-          if (currentIndex < steps) {
-            requestAnimationFrame(animate);
+          const route = {
+            'type': 'FeatureCollection',
+            'features': [
+                {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': [startPoint, endPoint]
+                    }
+                }
+            ]
+          };
+
+          const lineDistance = turf.length(route.features[0]);
+          const arc = [];
+          const steps = 500;
+          for (let i = 0; i < lineDistance; i += lineDistance / steps) {
+            const segment = turf.along(route.features[0], i);
+            arc.push(segment.geometry.coordinates);
           }
+          route.features[0].geometry.coordinates = arc;
+          let currentIndex = 0;
 
-          currentIndex = currentIndex + 1;
+          if (map.getSource('route')) {
+            map.getSource('route').setData(route);
+          } else {
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': route
+            });
+          }
+        
+          let running = false;
+          const animate = () => {
+            running = true;
+            currentIndex++
+            const start =
+                route.features[0].geometry.coordinates[
+                  currentIndex >= steps ? currentIndex - 1 : currentIndex
+                ];
+            const end =
+                route.features[0].geometry.coordinates[
+                  currentIndex >= steps ? currentIndex : currentIndex + 1
+                ];
+            if(!start || !end) {
+                running = false;
+                this.setState(prevState => ({
+                  showChatBox: !prevState.showChatBox,
+                  coordinates: coordinates,  
+                  clickedName: result.includes("J") ? 1 : result.includes("D")? 2 : 0,
+                }));
+                return;
+            }
 
-        }
-        animate();
+            mapImageManager.moveImage( urlData , route.features[0].geometry.coordinates[currentIndex]);
+
+            if (currentIndex < steps) {
+              requestAnimationFrame(animate);
+            }
+
+            currentIndex = currentIndex + 1;
+
+          }
+          animate();
+        })
       })
-    })
  
+    
 
     map.on('click', 'animatedPoint', (e) => {
       const title = e.features[0].properties.title;

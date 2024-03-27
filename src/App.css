@@ -80,6 +80,7 @@
 .map-chat-title {
   display: flex;
   justify-content: space-between;
+  color: #fff;
 }
 .map-chat-container {
   border-radius: 5px;
@@ -229,6 +230,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
+  color: #fff;
 }
 
 
