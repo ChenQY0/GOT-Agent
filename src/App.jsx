@@ -102,16 +102,29 @@ class MyMap extends React.Component {
                 ];
             if(!start || !end) {
                 running = false;
+                const point = map.project(map.getCenter());
                 this.setState(prevState => ({
                   showChatBox: !prevState.showChatBox,
-                  coordinates: coordinates,  
+                  coordinates: point,  
                   clickedName: result.includes("J") ? 1 : result.includes("D")? 2 : 0,
                 }));
                 return;
             }
 
+            map.flyTo(
+              {
+                center:  route.features[0].geometry.coordinates[currentIndex],
+                zoom: 3.9,
+                duration: 1000,
+              },
+              { moveend: "FLY_END" }
+            );
+      
+
             mapImageManager.moveImage( urlData , route.features[0].geometry.coordinates[currentIndex]);
 
+            
+            
             if (currentIndex < steps) {
               requestAnimationFrame(animate);
             }

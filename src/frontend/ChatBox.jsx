@@ -8,8 +8,8 @@ const conversationService = new ConversationService();
 function ChatBox(coordinates) {
     const style = {
         position: 'absolute',
-        left: `${coordinates.coordinates.x + 15}px`,  
-        top: `${coordinates.coordinates.y - 10}px`, 
+        left: `${coordinates.coordinates.x + 35}px`,  
+        top: `${coordinates.coordinates.y - 60}px`, 
     };
 
     const [messages, setMessages] = useState([]);
