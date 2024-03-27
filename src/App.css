@@ -1,0 +1,284 @@
+.mapContainer {
+  height: 100vh;
+  width: 100vw;
+  position: absolute; 
+  top: 0;
+}
+.mapboxgl-ctrl-bottom-left div{
+  display:none !important;
+}
+.map-overlay-container {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  z-index: 1;
+  max-width: 450px;
+}
+.map-avater {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.map-avatar-right {
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  border: 2px solid #CCA766;
+}
+.map-text-right {
+  margin-left: 10px;
+  color: #FFE9C2;
+  font-family: "PingFang SC";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px; 
+}
+.map-avater-info-box {
+  border-radius: 16px;
+  border: 2px solid #CCA766;
+  background: rgba(16, 20, 41, 0.70);
+  padding: 20px 30px 10px;
+}
+.map-avater-info-box .title {
+  color: #748199;
+  font-family: "PingFang SC";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px; 
+  margin-bottom: 16px;
+}
+.map-avater-info-box .title span {
+  position: absolute;
+  right: 30px;
+  font-size: 14px;
+}
+.map-avater-info-box div:hover{
+  cursor: pointer;
+}
+.map-avater-info-box .npc{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 10px;
+}
+.map-avater-info-box .npc img{
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}
+.map-avater-info-box .npc span {
+  margin-left: 10px;
+  font-family: "PingFang SC";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; 
+}
+
+.map-chat-title {
+  display: flex;
+  justify-content: space-between;
+}
+.map-chat-container {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  width: 450px;
+}
+
+.conversation__messages {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  padding: 1rem;
+  overflow-y: auto;
+  min-height: 300px;
+  max-height: 500px;
+}
+
+.conversation__bubble--me {
+  align-self: flex-end;
+  border-radius: 4px 12px 12px 12px;
+  background: #805100;
+  color: #FFECCC;
+  font-family: "PingFang HK";
+  font-size: 14px;
+}
+
+.conversation__bubble--other {
+  align-self: flex-start;
+  border-radius: 4px 12px 12px 12px;
+  background: linear-gradient(0deg, #FFECD6 0%, #FFECD6 100%), linear-gradient(90deg, #806333 0%, #996C1F 100%);
+  color: #29211D;
+  font-family: "PingFang HK";
+  font-size: 14px;
+}
+.conversation__input {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #2f3136;
+}
+
+.conversation__buttons {
+  display: flex;
+  flex: 1;
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.conversation__input input {
+  flex: 1;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background-color: #40444b;
+  color: #fff;
+}
+
+.conversation__input textarea {
+  flex-grow: 4;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  height: 64px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background-color: #40444b;
+  color: #fff;
+  resize: none;
+  overflow-y: scroll;
+}
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  background-color: #36393f;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center; /* center child elements vertically */
+  justify-content: end;
+}
+
+.conversation__bubble {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  max-width: 80%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.conversation__input ::-webkit-scrollbar {
+  width: 10px;
+  background-color: #40444b; 
+}
+
+.conversation__input ::-webkit-scrollbar-thumb {
+  background-color: #7289da; 
+}
+
+.conversation__input button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #7289da;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.conversation__input button:hover {
+  background-color: #677bc4;
+}
+
+
+.tip-info {
+  position: absolute;
+  top: 40%;
+  right: 0;
+  z-index: 1;
+  max-width: 450px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(16, 20, 41, 0.70);
+  padding: 10px;
+}
+
+.tip-info-title {
+  color: #748199;
+  font-family: 'Middle-earth Font', serif; 
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+}
+.tip-info-cont {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+
+
+
+
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+..mapboxgl-ctrl-bottom-left .mapboxgl-ctrl{
+  display:none !important;
+}
+
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
