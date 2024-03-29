@@ -95,8 +95,8 @@
   flex-grow: 0;
   padding: 1rem;
   overflow-y: auto;
-  min-height: 200px;
-  max-height: 500px;
+  min-height: 300px;
+  max-height: 400px;
 }
 
 .conversation__bubble--me {
