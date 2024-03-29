@@ -95,7 +95,7 @@
   flex-grow: 0;
   padding: 1rem;
   overflow-y: auto;
-  min-height: 300px;
+  min-height: 200px;
   max-height: 500px;
 }
 
